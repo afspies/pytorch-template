@@ -1,25 +1,9 @@
 from __future__ import absolute_import, division, print_function
 import os.path as op
 import numpy as np
-import pandas as pd
-import numpy.testing as npt
-import jax.numpy as jnp
-import haiku_template as sb
 
-data_path = op.join(sb.__path__[0], 'data')
-
-def test_haiku_model_wrapper():
-    cfg = {'linear':16}
-    class SimpleLinear(hk.Module):
-        def __init__(self, cfg, name=None):
-            super().__init__(name=name)
-            self.cfg = cfg
-        def __call__(self, x, analysis, debug):
-            return hk.Linear(self.cfg['linear'])(x)
-
-    model = sb.modules.HaikuAutoInit(cfg, SimpleLinear)
-    print(model(jnp.random.randn(28, 3)))
-
+import pytorch-template as project
+data_path = op.join(project.__path__[0], 'data')
 
 # def test_transform_data():
 #     """
