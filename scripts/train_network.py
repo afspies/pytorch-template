@@ -1,4 +1,4 @@
-import pytorch-template as project
+import hurms as project
 from pathlib import Path
 
 project.assign_free_gpus(threshold_vram_usage=3500)

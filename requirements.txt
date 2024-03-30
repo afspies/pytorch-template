@@ -3,6 +3,7 @@ numpy
 scipy
 pandas
 arrgh 
+tqdm
 
 # Visualization
 matplotlib
@@ -11,5 +12,4 @@ matplotlib
 
 
 # Deep learning
-torch
-torchvision
+# tensorflow_probability

@@ -2,7 +2,7 @@ from __future__ import absolute_import, division, print_function
 import os.path as op
 import numpy as np
 
-import pytorch-template as project
+import hurms as project
 data_path = op.join(project.__path__[0], 'data')
 
 # def test_transform_data():

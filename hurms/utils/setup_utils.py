@@ -1,6 +1,5 @@
 import random
 import numpy as np
-import torch
 
 import subprocess
 import time
@@ -13,17 +12,17 @@ def seed(seed=42, cublas_deterministic=False):
     random.seed(seed)
     np.random.seed(seed)
 
-    # -- Pytorch --
-    torch.manual_seed(seed)
-    if cublas_deterministic:
-        # The following may slightly slow down training:
-        torch.use_deterministic_algorithms(True)
-        os.environ[
-            "CUBLAS_WORKSPACE_CONFIG"
-        ] = ":4096:8"  # see https://docs.nvidia.com/cuda/cublas/index.html#cublasApi_reproducibility
-        #   torch may also require specifying seeded worker for dataloader
-        print("Using deterministic algorithms for CuBLAS and CuDNN")
-        print("You may need to specify a seeded worker for dataloader")
+    # # -- Pytorch --
+    # torch.manual_seed(seed)
+    # if cublas_deterministic:
+    #     # The following may slightly slow down training:
+    #     torch.use_deterministic_algorithms(True)
+    #     os.environ[
+    #         "CUBLAS_WORKSPACE_CONFIG"
+    #     ] = ":4096:8"  # see https://docs.nvidia.com/cuda/cublas/index.html#cublasApi_reproducibility
+    #     #   torch may also require specifying seeded worker for dataloader
+    #     print("Using deterministic algorithms for CuBLAS and CuDNN")
+    #     print("You may need to specify a seeded worker for dataloader")
 
 
 def assign_free_gpus(threshold_vram_usage=1500, max_gpus=2, wait=False, sleep_time=10):
@@ -43,13 +42,19 @@ def assign_free_gpus(threshold_vram_usage=1500, max_gpus=2, wait=False, sleep_ti
 
     def _check():
         # Get the list of GPUs via nvidia-smi
-        smi_query_result = subprocess.check_output("nvidia-smi -q -d Memory | grep -A4 GPU", shell=True)
+        smi_query_result = subprocess.check_output(
+            "nvidia-smi -q -d Memory | grep -A4 GPU", shell=True
+        )
         # Extract the usage information
         gpu_info = smi_query_result.decode("utf-8").split("\n")
         gpu_info = list(filter(lambda info: "Used" in info, gpu_info))
-        gpu_info = [int(x.split(":")[1].replace("MiB", "").strip()) for x in gpu_info]  # Remove garbage
+        gpu_info = [
+            int(x.split(":")[1].replace("MiB", "").strip()) for x in gpu_info
+        ]  # Remove garbage
         # Keep gpus under threshold only
-        free_gpus = [str(i) for i, mem in enumerate(gpu_info) if mem < threshold_vram_usage]
+        free_gpus = [
+            str(i) for i, mem in enumerate(gpu_info) if mem < threshold_vram_usage
+        ]
         free_gpus = free_gpus[: min(max_gpus, len(free_gpus))]
         gpus_to_use = ",".join(free_gpus)
         return gpus_to_use

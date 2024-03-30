@@ -28,46 +28,46 @@ CLASSIFIERS = [
 ]
 
 # Description should be a one-liner:
-description = "pytorch-template: a template for small scientific Python projects"
+description = "hurms: a template for small scientific Python projects"
 # Long description will go up on the pypi page
 long_description = """
 
-pytorch-template
+hurms
 ========
-pytorch-template is a template project for small scientific Python projects.
+hurms is a template project for small scientific Python projects.
 
 To get started using these components in your own software, please go to the
 repository README_.
 
-.. _README: https://github.com/afspies/pytorch-template/blob/master/README.md
+.. _README: https://github.com/afspies/hurms/blob/master/README.md
 
 License
 =======
-``pytorch-template`` is licensed under the terms of the MIT license. See the file
+``hurms`` is licensed under the terms of the MIT license. See the file
 "LICENSE" for information on the history of this software, terms & conditions
 for usage, and a DISCLAIMER OF ALL WARRANTIES.
 
 All trademarks referenced herein are property of their respective holders.
 
-Copyright (c) [[YEAR]], [[AUTHORS]] 
+Copyright (c) 2024, "SPIKE" 
 eScience Institute.
 """
 
-NAME = "pytorch-template"
-MAINTAINER = [[AUTHORS]]
+NAME = "hurms"
+MAINTAINER = "SPIKE"
 MAINTAINER_EMAIL = ""
 DESCRIPTION = description
 LONG_DESCRIPTION = long_description
 URL = "http://github.com/"
 DOWNLOAD_URL = ""
 LICENSE = "MIT"
-AUTHOR = [[AUTHORS]]
+AUTHOR = "SPIKE"
 AUTHOR_EMAIL = ""
 PLATFORMS = "OS Independent"
 MAJOR = _version_major
 MINOR = _version_minor
 MICRO = _version_micro
 VERSION = __version__
-PACKAGE_DATA = {"pytorch-template": [pjoin("data", "*")]}
+PACKAGE_DATA = {"hurms": [pjoin("data", "*")]}
 REQUIRES = []
 PYTHON_REQUIRES = ">= 3.5"
